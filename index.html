@@ -2,123 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>attescore</title>
+<title>404 - Page Not Found</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    color: #222;
-    scroll-behavior: smooth;
-}
-
-/* Top menu */
-.nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #222;
+    background: #111;
     color: #fff;
-    padding: 10px 16px;
-    z-index: 1000;
+    text-align: center;
+    padding-top: 20vh;
 }
-.nav a {
-    color: #fff;
-    margin-right: 15px;
+a {
+    color: #4da3ff;
     text-decoration: none;
-    font-weight: bold;
-}
-.nav a:hover {
-    text-decoration: underline;
-}
-
-/* Content */
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 80px 20px 40px;
-}
-
-.section {
-    margin-bottom: 60px;
-}
-
-h1, h2 {
-    color: #111;
-}
-
-.note {
-    background: #fff3cd;
-    border-left: 5px solid #ffcc00;
-    padding: 10px;
 }
 </style>
 </head>
 
 <body>
-
-<div class="nav">
-    <a href="#about">About</a>
-    <a href="#tutorial">Tutorial</a>
-    <a href="#license">License</a>
-</div>
-
-<div class="container">
-
-<section id="about" class="section">
-<h1>attescore</h1>
-<div class="note">
-<strong>Note:</strong> This project is still in development. Please use with caution.<br>
-<strong>注意：</strong>本專案仍在開發中，請小心使用。
-</div>
-
-<p>
-<strong>English:</strong><br>
-attescore is an experimental project focused on executing and researching ARM64 programs.
-</p>
-
-<p>
-<strong>中文：</strong><br>
-attescore 是一個用於 ARM64 程式執行與研究的實驗性專案。
-</p>
-</section>
-
-<section id="tutorial" class="section">
-<h2>Tutorial / 教學</h2>
-
-<h3>1. Requirements / 前置需求</h3>
-<ul>
-<li>macOS（Intel 或 Apple Silicon）</li>
-<li>Clang / Xcode Command Line Tools</li>
-<li>基本 ARM64 組合語言概念</li>
-</ul>
-
-<h3>2. Build / 編譯</h3>
-<pre><code>clang attescore.c arm64_cpu.c memory.c syscall.c -o attescore</code></pre>
-
-<h3>3. Run / 執行</h3>
-<pre><code>./attescore test_arm</code></pre>
-
-<h3>4. ARM64 Example / 範例</h3>
-<pre><code>.global _start
-_start:
-    mov x0, #7
-    ret
-</code></pre>
-
-<pre><code>clang -target arm64-apple-macos12 -nostdlib -Wl,-e,_start -o test_arm test.s</code></pre>
-</section>
-
-<section id="license" class="section">
-<h2>License</h2>
-<p>
-Apache License 2.0
-</p>
-</section>
-
-</div>
-
+<h1>404</h1>
+<p>Page Not Found</p>
+<p>頁面不存在</p>
+<p><a href="index.html">← Back to attescore</a></p>
 </body>
 </html>
