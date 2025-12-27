@@ -5,27 +5,129 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>atttescore</title>
 <style>
-    body { font-family: Arial, sans-serif; background-color: #f5f5f5; color: #333; text-align: center; padding: 50px; }
-    h1 { color: #1e90ff; }
+    /* 基本樣式 */
+    body { 
+        font-family: Arial, sans-serif; 
+        margin: 0; 
+        padding: 0; 
+        background-color: #f5f5f5; 
+        color: #333; 
+        scroll-behavior: smooth; /* 平滑滾動 */
+    }
+    h1, h2 { margin: 0.5em 0; }
     a { color: #1e90ff; text-decoration: none; }
     a:hover { text-decoration: underline; }
-    img { max-width: 200px; margin: 20px 0; }
+
+    /* Navbar 選單 */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1e90ff;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 1000;
+    }
+    .navbar img { height: 40px; margin-right: 15px; }
+    .navbar a { color: #fff; margin-right: 15px; font-weight: bold; }
+
+    /* 頁面內容 */
+    .content { padding: 80px 20px 20px 20px; max-width: 900px; margin: auto; }
+
+    /* 區塊淡入效果 */
+    .fade-in { 
+        opacity: 0; 
+        transform: translateY(20px); 
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in.visible { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+
+    img.logo { max-width: 200px; margin: 20px 0; display: block; }
 </style>
 </head>
 <body>
-<img src="assets/logo.png" alt="attescore logo">
-<h1>atttescore</h1>
-<p>⚠️ Note: This project is still in development. Please use with caution.</p>
-<p>本專案仍在開發中，請小心使用。</p>
 
-<h2>About / 專案介紹</h2>
-<p>atttescore is an experimental project for ARM64 program execution and research.</p>
-<p>atttescore 是一個用於 ARM64 程式執行與研究的實驗性專案。</p>
+<!-- Navbar 選單 -->
+<div class="navbar">
+    <img src="assets/logo.png" alt="atttescore logo">
+    <a href="#about">About / 專案介紹</a>
+    <a href="#tutorial">Tutorial / 教學</a>
+    <a href="README.md" target="_blank">README</a>
+</div>
 
-<h2>Links / 相關連結</h2>
-<ul style="list-style:none; padding:0;">
-    <li><a href="README.md">README</a></li>
-    <li><a href="https://github.com/LJW-102030/attescore">GitHub Repo</a></li>
-</ul>
+<!-- 頁面內容 -->
+<div class="content">
+    <h1 class="fade-in">atttescore</h1>
+    <p class="fade-in">⚠️ Note: This project is still in development. Please use with caution.</p>
+    <p class="fade-in">本專案仍在開發中，請小心使用。</p>
+
+    <h2 id="about" class="fade-in">About / 專案介紹</h2>
+    <p class="fade-in">atttescore is an experimental project for ARM64 program execution and research.</p>
+    <p class="fade-in">atttescore 是一個用於 ARM64 程式執行與研究的實驗性專案。</p>
+
+    <h2 id="tutorial" class="fade-in">Tutorial / 教學</h2>
+    <ol class="fade-in">
+        <li><strong>Prerequisites / 前置需求</strong>
+            <ul>
+                <li>macOS (Intel or Apple Silicon)</li>
+                <li>Clang / Xcode command line tools installed</li>
+                <li>Basic knowledge of ARM64 assembly and Mach-O binaries</li>
+            </ul>
+        </li>
+        <li><strong>Build / 編譯</strong>
+            <pre><code>clang src/*.c -Iinclude -o atttescore</code></pre>
+        </li>
+        <li><strong>Run / 執行</strong>
+            <pre><code>./atttescore test_arm</code></pre>
+        </li>
+        <li><strong>Example / 範例</strong>
+            <pre><code>
+.section .text
+.global _start
+_start:
+    mov x0, #42
+    ret
+            </code></pre>
+            Compile:
+            <pre><code>clang -target arm64-apple-macos12 -nostdlib -Wl,-e,_start -o test_arm test_arm.s</code></pre>
+        </li>
+    </ol>
+
+    <h2 class="fade-in">Links / 相關連結</h2>
+    <ul class="fade-in">
+        <li><a href="README.md">Full README</a></li>
+        <li><a href="https://github.com/你的帳號/attesintel">GitHub Repo</a></li>
+    </ul>
+</div>
+
+<script>
+    // 監控滾動，區塊淡入
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+</script>
+
 </body>
-</html> 
+</html>
