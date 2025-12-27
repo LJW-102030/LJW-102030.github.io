@@ -2,27 +2,161 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>404 - Page Not Found</title>
+<title>attescore</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+    scroll-behavior: smooth;
+}
+
+/* ===== Top Menu ===== */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: #111;
     color: #fff;
-    text-align: center;
-    padding-top: 20vh;
+    padding: 10px 16px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
 }
-a {
-    color: #4da3ff;
+.nav a {
+    color: #fff;
+    margin-left: 16px;
     text-decoration: none;
+    font-weight: bold;
+}
+.nav a:hover {
+    text-decoration: underline;
+}
+.logo {
+    height: 40px;
+}
+
+/* ===== Content ===== */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 90px 20px 40px;
+}
+
+.section {
+    margin-bottom: 70px;
+}
+
+/* ===== Note ===== */
+.note {
+    background: #fff3cd;
+    border-left: 5px solid #ffcc00;
+    padding: 12px;
+    margin: 15px 0;
+}
+
+/* ===== Animation ===== */
+.fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 </style>
 </head>
 
 <body>
-<h1>404</h1>
-<p>Page Not Found</p>
-<p>頁面不存在</p>
-<p><a href="index.html">← Back to attescore</a></p>
+
+<!-- ===== Navigation ===== -->
+<div class="nav">
+    <!-- 如果你還沒 logo，可先留著 -->
+    <img src="assets/logo.png" class="logo" alt="attescore logo">
+    <a href="#about">About</a>
+    <a href="#tutorial">Tutorial</a>
+    <a href="#license">License</a>
+</div>
+
+<div class="container">
+
+<!-- ===== About ===== -->
+<section id="about" class="section fade">
+<h1>attescore</h1>
+
+<div class="note">
+<strong>Note:</strong> This project is still in development. Please use with caution.<br>
+<strong>注意：</strong>本專案仍在開發中，請小心使用。
+</div>
+
+<p>
+<strong>English:</strong><br>
+attescore is an experimental project focused on ARM64 program execution,
+binary loading, and low-level system research.
+</p>
+
+<p>
+<strong>中文：</strong><br>
+attescore 是一個專注於 ARM64 程式執行、Mach-O 載入與系統層研究的實驗性專案。
+</p>
+</section>
+
+<!-- ===== Tutorial ===== -->
+<section id="tutorial" class="section fade">
+<h2>Tutorial / 教學</h2>
+
+<h3>1. Requirements / 前置需求</h3>
+<ul>
+<li>macOS（Intel 或 Apple Silicon）</li>
+<li>Clang / Xcode Command Line Tools</li>
+<li>ARM64 Assembly 基本概念</li>
+</ul>
+
+<h3>2. Build / 編譯</h3>
+<pre><code>clang attescore.c arm64_cpu.c memory.c syscall.c -o attescore</code></pre>
+
+<h3>3. Run / 執行</h3>
+<pre><code>./attescore test_arm</code></pre>
+
+<h3>4. ARM64 Example / 範例</h3>
+<pre><code>.global _start
+_start:
+    mov x0, #7
+    ret
+</code></pre>
+
+<pre><code>clang -target arm64-apple-macos12 -nostdlib -Wl,-e,_start -o test_arm test.s</code></pre>
+</section>
+
+<!-- ===== License ===== -->
+<section id="license" class="section fade">
+<h2>License</h2>
+<p>
+Apache License 2.0
+</p>
+</section>
+
+</div>
+
+<!-- ===== Animation Script ===== -->
+<script>
+const elements = document.querySelectorAll('.fade');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+    });
+}, { threshold: 0.2 });
+
+elements.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
