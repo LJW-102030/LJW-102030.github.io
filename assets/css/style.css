@@ -1,8 +1,16 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #111;
+  background: linear-gradient(-45deg, #1e1e1e, #2e2e2e, #1e1e1e, #2e2e2e);
+  background-size: 400% 400%;
   color: #fff;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .menu {
@@ -12,6 +20,7 @@ body {
   background: rgba(0,0,0,0.6);
   padding: 8px 12px;
   border-radius: 8px;
+  z-index: 1000;
 }
 
 .menu a {
@@ -23,4 +32,35 @@ body {
 
 main {
   padding: 80px 20px;
+  text-align: center;
+}
+
+.fade {
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+.slide {
+  animation: slideIn 2s ease forwards;
+  opacity: 0;
+}
+
+.float {
+  width: 150px;
+  margin-top: 20px;
+  animation: floatAnim 3s ease-in-out infinite alternate;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatAnim {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-15px); }
 }
